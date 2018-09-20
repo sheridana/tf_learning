@@ -6,5 +6,10 @@ ADD . /tf_learning
 
 RUN pip install -r requirements.txt
 
-ENV NAME World
+RUN mkdir /notebooks && chmod a+rwx /notebooks
+RUN mkdir /.local && chmod a+rwx /.local
+RUN mkdir /notebooks/test
+WORKDIR /notebooks
+EXPOSE 8888
 
+CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter notebook --notebook-dir=/notebooks --ip 0.0.0.0 --no-browser --allow-root"]
